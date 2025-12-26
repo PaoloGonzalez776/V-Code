@@ -1,0 +1,137 @@
+name: Compilar y Publicar V-Code
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Compilar para ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            name: linux-x64
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            name: windows-x64
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            name: macos-arm64
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Instalar Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: ${{ matrix.target }}
+          override: true
+
+      - name: Compilar V-Code
+        working-directory: ./compilador
+        run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Preparar archivos para distribución
+        shell: bash
+        run: |
+          mkdir -p dist/v-code-0.1.0
+          
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            cp compilador/target/${{ matrix.target }}/release/vcode.exe dist/v-code-0.1.0/
+          else
+            cp compilador/target/${{ matrix.target }}/release/vcode dist/v-code-0.1.0/
+          fi
+          
+          cp -r ejemplos dist/v-code-0.1.0/
+          cp README.md LICENSE dist/v-code-0.1.0/ 2>/dev/null || true
+          
+          cat > dist/v-code-0.1.0/LEEME.txt << 'EOF'
+          V-Code v0.1.0 - Lenguaje de Programación para VR
+          
+          INICIO RÁPIDO:
+          
+          Linux/macOS:
+            chmod +x vcode
+            ./vcode ejemplos/hola.vc
+          
+          Windows:
+            vcode.exe ejemplos\hola.vc
+          
+          REPOSITORIO:
+            https://github.com/PaoloGonzalez776/V-Code
+          EOF
+
+      - name: Comprimir para distribución
+        shell: bash
+        run: |
+          cd dist
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            7z a -tzip v-code-0.1.0-${{ matrix.name }}.zip v-code-0.1.0/
+          else
+            tar -czf v-code-0.1.0-${{ matrix.name }}.tar.gz v-code-0.1.0/
+          fi
+
+      - name: Subir binario como artefacto
+        uses: actions/upload-artifact@v3
+        with:
+          name: v-code-0.1.0-${{ matrix.name }}
+          path: |
+            dist/v-code-0.1.0-${{ matrix.name }}.tar.gz
+            dist/v-code-0.1.0-${{ matrix.name }}.zip
+
+  release:
+    name: Crear Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar todos los artefactos
+        uses: actions/download-artifact@v3
+
+      - name: Crear Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            v-code-0.1.0-linux-x64/*.tar.gz
+            v-code-0.1.0-windows-x64/*.zip
+            v-code-0.1.0-macos-arm64/*.tar.gz
+          body: |
+            # 🚀 V-Code v0.1.0
+            
+            Primer release oficial del lenguaje de programación nativo para VR en español.
+            
+            ## 📥 Descarga para tu Sistema
+            
+            - **Linux x64**: `v-code-0.1.0-linux-x64.tar.gz`
+            - **Windows x64**: `v-code-0.1.0-windows-x64.zip`
+            - **macOS ARM**: `v-code-0.1.0-macos-arm64.tar.gz`
+            
+            ## ⚡ Inicio Rápido
+            
+            ### Linux/macOS
+            ```bash
+            tar -xzf v-code-0.1.0-linux-x64.tar.gz
+            cd v-code-0.1.0
+            chmod +x vcode
+            ./vcode ejemplos/hola.vc
+            ```
+            
+            ### Windows
+            ```bash
+            # Extraer el .zip
+            vcode.exe ejemplos\hola.vc
+            ```
+            
+            ## ✨ Características
+            
+            - ✅ Sintaxis en español
+            - ✅ Variables y funciones
+            - ✅ Control de flujo
+            - ✅ Preparado para VR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
