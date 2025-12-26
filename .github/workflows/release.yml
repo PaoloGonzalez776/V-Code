@@ -78,7 +78,7 @@ jobs:
           fi
 
       - name: Subir binario como artefacto
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: v-code-0.1.0-${{ matrix.name }}
           path: |
@@ -94,7 +94,7 @@ jobs:
         uses: actions/download-artifact@v3
 
       - name: Crear Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v4
         with:
           files: |
             v-code-0.1.0-linux-x64/*.tar.gz
