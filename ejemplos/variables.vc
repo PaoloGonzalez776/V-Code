@@ -1,0 +1,61 @@
+// variables.vc - Demostración de variables y tipos de datos
+
+escena DemoVariables {
+    // Números enteros
+    var edad = 25
+    var puntos = 1000
+    
+    mostrar "Edad:"
+    mostrar edad
+    mostrar "Puntos:"
+    mostrar puntos
+    
+    // Números decimales
+    var altura = 1.75
+    var peso = 70.5
+    
+    mostrar "Altura (m):"
+    mostrar altura
+    mostrar "Peso (kg):"
+    mostrar peso
+    
+    // Texto
+    var nombre = "V-Code"
+    var mensaje = "Bienvenido a la Realidad Virtual"
+    
+    mostrar nombre
+    mostrar mensaje
+    
+    // Booleanos
+    var activo = verdadero
+    var pausado = falso
+    
+    mostrar "Sistema activo:"
+    mostrar activo
+    mostrar "Juego pausado:"
+    mostrar pausado
+    
+    // Operaciones aritméticas
+    var suma = 10 + 20
+    var resta = 50 - 15
+    var multiplicacion = 6 * 7
+    var division = 100 / 4
+    
+    mostrar "Suma: 10 + 20 ="
+    mostrar suma
+    mostrar "Resta: 50 - 15 ="
+    mostrar resta
+    mostrar "Multiplicación: 6 * 7 ="
+    mostrar multiplicacion
+    mostrar "División: 100 / 4 ="
+    mostrar division
+    
+    // Concatenación de texto
+    var saludo = "Hola, " + nombre
+    mostrar saludo
+    
+    // Expresiones complejas
+    var resultado = (10 + 5) * 2 - 8
+    mostrar "Resultado de (10 + 5) * 2 - 8:"
+    mostrar resultado
+}

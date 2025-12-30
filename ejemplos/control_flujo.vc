@@ -1,0 +1,87 @@
+// control_flujo.vc - Demostración de estructuras de control
+
+escena DemoControlFlujo {
+    mostrar "=== Condicionales ==="
+    
+    // Condicional simple
+    var edad = 25
+    
+    si edad > 18 {
+        mostrar "Mayor de edad"
+    } sino {
+        mostrar "Menor de edad"
+    }
+    
+    // Condicionales con operadores lógicos
+    var temperatura = 22
+    
+    si temperatura < 15 {
+        mostrar "Hace frío"
+    } sino {
+        si temperatura < 25 {
+            mostrar "Temperatura agradable"
+        } sino {
+            mostrar "Hace calor"
+        }
+    }
+    
+    mostrar "=== Bucle Mientras ==="
+    
+    // Bucle mientras
+    var contador = 0
+    
+    mientras contador < 5 {
+        mostrar "Contador:"
+        mostrar contador
+        contador = contador + 1
+    }
+    
+    mostrar "=== Bucle Para ==="
+    
+    // Bucle para (range)
+    para i = 0, 10 {
+        mostrar i
+    }
+    
+    mostrar "=== Tabla de Multiplicar ==="
+    
+    // Tabla del 5
+    var numero = 5
+    
+    para i = 1, 11 {
+        var resultado = numero * i
+        mostrar resultado
+    }
+    
+    mostrar "=== Comparaciones ==="
+    
+    var a = 10
+    var b = 20
+    
+    si a == b {
+        mostrar "a es igual a b"
+    } sino {
+        mostrar "a es diferente de b"
+    }
+    
+    si a < b {
+        mostrar "a es menor que b"
+    }
+    
+    si b > a {
+        mostrar "b es mayor que a"
+    }
+    
+    mostrar "=== Operadores Lógicos ==="
+    
+    var tiene_llave = verdadero
+    var puerta_abierta = falso
+    
+    si tiene_llave y no puerta_abierta {
+        mostrar "Puedes abrir la puerta"
+    }
+    
+    si tiene_llave o puerta_abierta {
+        mostrar "Puedes entrar"
+    }
+}

@@ -1,0 +1,14 @@
+[package]
+name = "vcode"
+version = "0.1.0"
+edition = "2021"
+authors = ["Paolo Gonzalez <paolo@vcode.dev>"]
+description = "Lenguaje de programación nativo para Realidad Virtual en español"
+license = "MIT"
+repository = "https://github.com/PaoloGonzalez776/V-Code"
+
+[[bin]]
+name = "vcode"
+path = "src/main.rs"
+
+[dependencies]

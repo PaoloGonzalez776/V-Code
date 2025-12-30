@@ -1,0 +1,128 @@
+// funciones.vc - Demostración de funciones definidas por el usuario
+
+// Función simple que retorna la suma de dos números
+funcion sumar(a: numero, b: numero): numero {
+    retornar a + b
+}
+
+// Función que retorna la resta
+funcion restar(a: numero, b: numero): numero {
+    retornar a - b
+}
+
+// Función que retorna la multiplicación
+funcion multiplicar(a: numero, b: numero): numero {
+    retornar a * b
+}
+
+// Función que retorna la división
+funcion dividir(a: numero, b: numero): numero {
+    retornar a / b
+}
+
+// Función que calcula el cuadrado de un número
+funcion cuadrado(x: numero): numero {
+    retornar x * x
+}
+
+// Función que calcula el factorial (recursiva simulada con bucle)
+funcion factorial(n: numero): numero {
+    var resultado = 1
+    var i = 1
+    
+    mientras i <= n {
+        resultado = resultado * i
+        i = i + 1
+    }
+    
+    retornar resultado
+}
+
+// Función que genera un saludo personalizado
+funcion saludar(nombre: texto): texto {
+    retornar "Hola, " + nombre
+}
+
+// Función que verifica si un número es par
+funcion es_par(n: numero): numero {
+    var residuo = n % 2
+    si residuo == 0 {
+        retornar 1
+    } sino {
+        retornar 0
+    }
+}
+
+// Función que calcula el máximo de dos números
+funcion maximo(a: numero, b: numero): numero {
+    si a > b {
+        retornar a
+    } sino {
+        retornar b
+    }
+}
+
+// Escena principal que usa todas las funciones
+escena Principal {
+    mostrar "=== Operaciones Básicas ==="
+    
+    var suma = sumar(10, 20)
+    mostrar "10 + 20 ="
+    mostrar suma
+    
+    var resta = restar(50, 15)
+    mostrar "50 - 15 ="
+    mostrar resta
+    
+    var multiplicacion = multiplicar(6, 7)
+    mostrar "6 * 7 ="
+    mostrar multiplicacion
+    
+    var division = dividir(100, 4)
+    mostrar "100 / 4 ="
+    mostrar division
+    
+    mostrar "=== Funciones Matemáticas ==="
+    
+    var cuad = cuadrado(5)
+    mostrar "Cuadrado de 5:"
+    mostrar cuad
+    
+    var fact = factorial(5)
+    mostrar "Factorial de 5:"
+    mostrar fact
+    
+    mostrar "=== Funciones con Texto ==="
+    
+    var mensaje = saludar("V-Code")
+    mostrar mensaje
+    
+    var otro_mensaje = saludar("Desarrollador VR")
+    mostrar otro_mensaje
+    
+    mostrar "=== Funciones Lógicas ==="
+    
+    var num1 = 10
+    var num2 = 7
+    
+    var par1 = es_par(num1)
+    mostrar "10 es par:"
+    mostrar par1
+    
+    var par2 = es_par(num2)
+    mostrar "7 es par:"
+    mostrar par2
+    
+    var max = maximo(15, 23)
+    mostrar "Máximo entre 15 y 23:"
+    mostrar max
+    
+    mostrar "=== Composición de Funciones ==="
+    
+    var a = sumar(5, 3)
+    var b = multiplicar(2, 4)
+    var resultado = sumar(a, b)
+    
+    mostrar "Resultado de sumar(5+3, 2*4):"
+    mostrar resultado
+}

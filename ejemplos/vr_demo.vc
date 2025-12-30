@@ -1,0 +1,145 @@
+// vr_demo.vc - Demostración de conceptos preparados para VR
+// Nota: Las características VR completas están en desarrollo
+// Este ejemplo muestra la sintaxis preparada para futuras versiones
+
+escena EspacioVR {
+    mostrar "=== Inicializando Entorno VR ==="
+    
+    // Variables para simulación VR
+    var fps_objetivo = 90
+    var latencia_maxima = 20
+    
+    mostrar "FPS objetivo:"
+    mostrar fps_objetivo
+    mostrar "Latencia máxima (ms):"
+    mostrar latencia_maxima
+    
+    // Simulación de posición en espacio 3D
+    var pos_x = 0
+    var pos_y = 1
+    var pos_z = 0
+    
+    mostrar "=== Posición Inicial ==="
+    mostrar "X:"
+    mostrar pos_x
+    mostrar "Y:"
+    mostrar pos_y
+    mostrar "Z:"
+    mostrar pos_z
+    
+    // Simulación de movimiento
+    mostrar "=== Simulando Movimiento ==="
+    
+    para frame = 0, 10 {
+        pos_x = pos_x + 1
+        pos_z = pos_z + 2
+        
+        mostrar "Frame:"
+        mostrar frame
+        mostrar "Posición X:"
+        mostrar pos_x
+        mostrar "Posición Z:"
+        mostrar pos_z
+    }
+    
+    // Detección de colisión simple
+    mostrar "=== Sistema de Colisiones ==="
+    
+    var distancia_minima = 5
+    var distancia_actual = 3
+    
+    si distancia_actual < distancia_minima {
+        mostrar "¡Colisión detectada!"
+    } sino {
+        mostrar "Espacio libre"
+    }
+    
+    // Sistema de puntuación VR
+    mostrar "=== Sistema de Puntuación ==="
+    
+    var puntos = 0
+    var objetivos_alcanzados = 0
+    
+    para intento = 1, 6 {
+        puntos = puntos + 10
+        objetivos_alcanzados = objetivos_alcanzados + 1
+        
+        mostrar "Intento:"
+        mostrar intento
+        mostrar "Puntos totales:"
+        mostrar puntos
+    }
+    
+    mostrar "Objetivos alcanzados:"
+    mostrar objetivos_alcanzados
+    
+    // Cálculo de rendimiento
+    mostrar "=== Métricas de Rendimiento ==="
+    
+    var frames_renderizados = 900
+    var tiempo_segundos = 10
+    var fps_real = frames_renderizados / tiempo_segundos
+    
+    mostrar "FPS real:"
+    mostrar fps_real
+    
+    si fps_real >= fps_objetivo {
+        mostrar "Rendimiento óptimo"
+    } sino {
+        mostrar "Advertencia: FPS bajo"
+    }
+}
+
+// Función para calcular distancia (simplificada)
+funcion calcular_distancia(x1: numero, x2: numero): numero {
+    var diferencia = x2 - x1
+    
+    si diferencia < 0 {
+        diferencia = diferencia * -1
+    }
+    
+    retornar diferencia
+}
+
+// Escena de interacción
+escena InteraccionVR {
+    mostrar "=== Sistema de Interacción VR ==="
+    
+    // Simulación de estado de controlador
+    var boton_presionado = falso
+    var gatillo_valor = 0
+    
+    mostrar "Estado inicial del controlador:"
+    mostrar boton_presionado
+    
+    // Simular presión de botón
+    boton_presionado = verdadero
+    gatillo_valor = 75
+    
+    mostrar "Botón presionado:"
+    mostrar boton_presionado
+    mostrar "Valor del gatillo:"
+    mostrar gatillo_valor
+    
+    // Lógica de interacción
+    si boton_presionado y gatillo_valor > 50 {
+        mostrar "¡Acción ejecutada!"
+    }
+    
+    // Calcular distancia entre objetos
+    var objeto_a = 10
+    var objeto_b = 25
+    var distancia = calcular_distancia(objeto_a, objeto_b)
+    
+    mostrar "Distancia entre objetos:"
+    mostrar distancia
+}
+
+// Nota: Características VR completas vendrán en futuras versiones:
+//
+// - Tipos nativos: vector3, pose, mano, controlador
+// - Callbacks de frame: cada frame { ... }
+// - Eventos de input: cuando controlador.gatillo > 0.5 { ... }
+// - Sistema de física VR
+// - Audio espacial
+// - Renderizado optimizado 90-120 FPS

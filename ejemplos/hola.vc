@@ -1,0 +1,7 @@
+// hola.vc - Hola Mundo en V-Code
+// El programa más simple en V-Code
+
+escena Principal {
+    mostrar "V-Code ha nacido"
+    mostrar "Lenguaje de programación nativo para VR"
+}
